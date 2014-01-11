@@ -1,0 +1,41 @@
+<div class="panel-group" id="sets-accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" ng-click="show('all-properties')">
+                    All Properties
+                </a>
+            </h4>
+        </div>
+        <div id="all-properties" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <button ng-click="selectAll()">Select All</button>
+                <button ng-click="deselectAll()">Deselect All</button>
+                <input style="margin: 10px 0; position: relative; width: 100%;" ng-model="model.searchText" placeholder="Search properties"></input>
+                <ul>
+                    <li ng-repeat="property in properties | search: 'name': model.searchText" style="width: 100%;"><input type="checkbox" id="property-{{ property.name }}-selected" ng-model="property.selected" ng-change="updateSelected()"></input> <label for="property-{{ property.name }}-selected">{{ property.name }}</label> <button ng-click="deleteProperty(property)" class="pull-right">-</button></li>
+                    <li><form ng-submit="createProperty()"><input type="text" placeholder="Property name" ng-model="model.newProperty.name"></input><button>+</button></form></li>
+                </ul>
+                <p>
+                    <hr />
+                    <form ng-submit="createSet()"><input type="text" placeholder="Set name" ng-model="model.newSet.name"></input><button>Create Set</button></form>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-repeat="set in sets">
+        <div class="panel-heading">
+            <h4 class="panel-title" style="width: 100%;">
+                <a class="accordion-toggle" ng-click="show(set)">{{ set.name }}</a> <button ng-click="deleteSet(set)" class="pull-right">-</button>
+            </h4>
+        </div>
+        <div id="set-{{ set.id }}" class="panel-collapse collapse">
+            <div class="panel-body">
+                <ul>
+                    <li ng-repeat="property in set.properties" style="width: 100%;"><label>{{ property.name }}</label> <button ng-click="deletePropertyFromSet(set, property)" class="pull-right">-</button></li>
+                    <li><form ng-submit="createPropertyInSet(set)"><input type="text" placeholder="Property name" ng-model="model.newProperty.name"></input><button>+</button></form></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

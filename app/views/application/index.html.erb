@@ -1,0 +1,63 @@
+<!doctype HTML>
+<html>
+  <head>
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'http://code.jquery.com/jquery-1.10.2.min.js' %>
+    <%= javascript_include_tag 'app' %>
+    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js' %>
+    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js' %>
+
+    <style>
+      a.accordion-toggle {
+        cursor: pointer;
+      } 
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style-type: none;
+      }
+      li label {
+        width: 80%;
+        cursor: pointer;
+      }
+      li:hover {
+        background-color: #e7e7e7;
+      }
+    </style>
+  </head>
+  <body ng-app="App" ng-controller="App.views.main">
+  
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <h1>Rentlytics</h1>
+            </div>
+            <div class="col-lg-9">
+                <div style="position: relative; height: 100px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div sets="main.model.sets" properties="main.model.properties"
+                    selected-set="main.model.selectedSet" selected-properties="main.model.selectedProperties"
+                    ></div>
+            </div>
+            <div class="col-lg-9">
+              <div ng-show="main.model.selectedSet">
+                <h1>{{ main.model.selectedSet.name }}</h1>
+                <h2 ng-repeat="property in main.model.selectedSet.properties">{{ property.name }}</h2>
+              </div>
+              <div ng-hide="main.model.selectedSet">
+                <h1><i>Unnamed Portfolio</i></h1>
+                <h2 ng-repeat="property in main.model.selectedProperties">{{ property.name }}</h2>
+              </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>
