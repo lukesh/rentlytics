@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 gem 'rails', '>= 4.0'
-gem 'pg'
+gem 'sqlite3'
 
 # For the web implementation
 gem 'coffee-script'
